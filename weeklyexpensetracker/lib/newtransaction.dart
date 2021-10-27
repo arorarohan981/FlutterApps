@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
 
+
 class NewTransaction extends StatefulWidget {
   final _addtransaction;
   NewTransaction(this._addtransaction);
@@ -46,52 +47,61 @@ class _NewTransactionState extends State<NewTransaction> {
     Navigator.of(context).pop(); //Closes the Modal Sheet.
   }
 
+
+//For Ios we can use Cupertino TExt Field.
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              TextField(
-                autocorrect: true,
-                decoration: InputDecoration(labelText: 'Title'),
-                controller: textEditingController,
-              ),
-              TextField(
-                autocorrect: true,
-                controller: amountEditingController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(labelText: 'Amount'),
-                onSubmitted: (_) {
-                  //_ :We are not using the argument.
-                  submitData();
-                },
-              ),
-              Container(
-                height: 70,
-                child: Row(
-                  children: [
-                    Text(_selectedDate==null ? 'No date Chosen' :DateFormat.yMd().format(_selectedDate)),
-                    ElevatedButton(
-                      onPressed: _PresentDatePicker,
-                      child: Text('Choose Date',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    )
-                  ],
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        child: Container(
+            padding: EdgeInsets.only(top:10,left: 10,right: 10,bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                TextField(
+                  autocorrect: true,
+                  decoration: InputDecoration(labelText: 'Title'),
+                  controller: textEditingController,
                 ),
-              ),
-              Container(
-                  margin: EdgeInsets.all(5),
-                  child: ElevatedButton(
-                      onPressed: submitData,
-                      child: Text(
-                        'Add Transaction',
-                        style: TextStyle(color: Colors.black),
-                      )))
-            ],
-          )),
+                TextField(
+                  autocorrect: true,
+                  controller: amountEditingController,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(labelText: 'Amount'),
+                  onSubmitted: (_) {
+                    //_ :We are not using the argument.
+                    submitData();
+                  },
+                ),
+                Container(
+                  height: 70,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(_selectedDate==null ? 'No date Chosen' :DateFormat.yMd().format(_selectedDate),),
+                      ),
+                      
+                      ElevatedButton(
+                        onPressed: _PresentDatePicker,
+                        child: Text('Choose Date',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                    margin: EdgeInsets.all(5),
+                    child: ElevatedButton(
+                        onPressed: submitData,
+                        child: Text(
+                          'Add Transaction',
+                          style: TextStyle(color: Colors.black),
+                        )))
+              ],
+            )),
+      ),
     );
   }
 }

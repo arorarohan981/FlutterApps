@@ -10,7 +10,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 450,
+       
         child: _usertransaction.isEmpty
             ? Image.asset(
                 'assets/fonts/images/waiting.jpg',
